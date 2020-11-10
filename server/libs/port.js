@@ -1,3 +1,3 @@
 module.exports = app => {
-    app.set('port', process.env.PORT || 3500);
+    app.set('port', process.env.PORT || 3000);
 }

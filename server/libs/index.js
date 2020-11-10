@@ -2,5 +2,6 @@ module.exports = [
     'port',
     'start',
     'morgan',
-    'cors'
+    'cors',
+    'product'
 ]
