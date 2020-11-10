@@ -3,5 +3,6 @@ module.exports = [
     'start',
     'morgan',
     'cors',
-    'product'
+    'product',
+    'coupon'
 ]

@@ -1,5 +1,4 @@
 var express = require('express');
-const { restart } = require('nodemon');
 var db = require('../database');
 
 const productCtrl = {};
