@@ -4,5 +4,6 @@ const router = express.Router();
 
 
 router.get('/', productCtrl.getProducts);
+router.get('/:id_product', productCtrl.getProductById);
 
 module.exports = router;
