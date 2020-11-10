@@ -67,4 +67,29 @@ couponCtrl.getCouponById = (req, res) => {
     }
 }
 
+couponCtrl.validateCouponById = (req, res) => {
+    let id = req.params.id_coupon;
+    if (req.headers.auth == 'customer') {
+        db.query(`SELECT * FROM Coupon WHERE Id_coupon='${id}'`, (err, data) => {
+            if (err) {
+                res.json({ error: err });
+                console.log("Hubo un error en la busqueda del cupon" + err);
+            } else {
+                if((Date.now()-Date.parse(data[0].VALID_SINCE)) > 0 && (Date.now()-Date.parse(data[0].VALID_UNTIL)) < 0){
+                    res.status(200).send({ validez: "VALIDO" });
+                } else {
+                    res.status(200).send({ validez: "INVALIDO" });
+                }
+            }
+        });
+    } else if (req.headers.auth == 'admin') {
+        console.log("Servicio denegado, solo administrador");
+        res.status(403).send({ error: "No esta autorizado para esta acción" });
+    }
+    else {
+        console.log("Servicio denegado encabezado incorrecto ");
+        res.status(401).send({ error: "No esta autorizado encabezado incorrecto" });
+    }
+}
+
 module.exports = couponCtrl;
